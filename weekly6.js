@@ -1,3 +1,6 @@
+//Morgan Lincicum
+//CPSC444 Weekly Challenge 6
+
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 
 import { OrbitControls }
@@ -80,7 +83,7 @@ box("back wall window header", [6.15, 2.2, 0.24], [-1.5, 6.9, -5], materials.wal
 box("back wall window sill", [6.15, 1.05, 0.24], [-1.5, 0.525, -5], materials.wall);
 
 // A soft blue daytime landscape sits beyond the openings in the rear wall.
-const sky = new THREE.MeshBasicMaterial({ color: 0x83c8d7 });
+const sky = new THREE.MeshBasicMaterial({ color: 0xffcc88 });
 const distantHill = new THREE.MeshBasicMaterial({ color: 0x8ea98a });
 const nearHill = new THREE.MeshBasicMaterial({ color: 0x597d5b });
 box("outside sky", [14, 12, 0.12], [0, 5, -5.8], sky, false);
@@ -158,10 +161,14 @@ lampShade.position.set(1.5, 2.18, 1.15);
 scene.add(lampShade);
 box("lamp stem", [0.09, 0.8, 0.09], [1.5, 1.68, 1.15], materials.metal);
 
-const ambientLight = new THREE.HemisphereLight(0xe2f1ff, 0x75614c, 1.45);
+
+//lightsources
+//ambient
+const ambientLight = new THREE.HemisphereLight(0xf59127, 0x75614c, 0.5);
 scene.add(ambientLight);
 
-const sunlight = new THREE.DirectionalLight(0xffe2b6, 3.1);
+//sun
+const sunlight = new THREE.DirectionalLight(0xFF8C00, 1);
 sunlight.position.set(-5, 10, 7);
 sunlight.castShadow = true;
 sunlight.shadow.mapSize.set(2048, 2048);
@@ -171,7 +178,8 @@ sunlight.shadow.camera.top = 12;
 sunlight.shadow.camera.bottom = -4;
 scene.add(sunlight);
 
-const lampGlow = new THREE.PointLight(0xffc56f, 28, 5);
+//lamp
+const lampGlow = new THREE.PointLight(0xffcc88, 30, 50);
 lampGlow.position.set(1.5, 2.1, 1.15);
 scene.add(lampGlow);
 
