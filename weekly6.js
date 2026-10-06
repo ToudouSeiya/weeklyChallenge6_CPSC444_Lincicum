@@ -118,7 +118,7 @@ for (const x of [2.1, 3.55]) {
     box("console handle", [0.22, 0.045, 0.07], [x, 0.49, -3.825], materials.metal);
 }
 box("television frame", [3.5, 2.15, 0.16], [2.95, 2.42, -4.43], materials.metal);
-const screenMaterial = new THREE.MeshBasicMaterial({ color: 0x172aff });
+const screenMaterial = new THREE.MeshBasicMaterial({ color: 0x172a33 });
 box("television screen", [3.28, 1.92, 0.025], [2.95, 2.43, -4.335], screenMaterial, false);
 box("tv stand neck", [0.16, 0.35, 0.16], [2.95, 1.32, -4.34], materials.metal);
 box("tv stand foot", [0.9, 0.08, 0.38], [2.95, 1.13, -4.32], materials.metal);
@@ -164,11 +164,11 @@ box("lamp stem", [0.09, 0.8, 0.09], [1.5, 1.68, 1.15], materials.metal);
 
 //lightsources
 //ambient
-const ambientLight = new THREE.HemisphereLight(0xf59127, 0x75614c, 0.1);
+const ambientLight = new THREE.HemisphereLight(0xffffff, 0x75614c, 0.3);
 scene.add(ambientLight);
 
 //sun
-const sunlight = new THREE.DirectionalLight(0x008cff, 0.5);
+const sunlight = new THREE.DirectionalLight(0x0000ff, 0.5);
 sunlight.position.set(-5, 10, 7);
 sunlight.castShadow = true;
 sunlight.shadow.mapSize.set(2048, 2048);
@@ -184,9 +184,14 @@ lampGlow.position.set(1.5, 2.1, 1.15);
 scene.add(lampGlow);
 
 //TV
-const tvLight = new THREE.PointLight(0x88aaff, 50, 100);
+const tvLight = new THREE.PointLight(0x88aaff, 0, 100);
 tvLight.position.set(2.95, 2.43, -4.335);
 scene.add(tvLight);
+
+//lightning
+const lightning = new THREE.PointLight(0xffffff, 0, 600);
+lightning.position.set(0, 4, -4.25);
+scene.add(lightning);
 
 
 window.addEventListener("resize", () => {
@@ -199,6 +204,8 @@ function animate() {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
+
+    lightning.intensity = Math.random() > 0.98 ? 30 : 0; 
 }
 
 animate();
